@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,37 +19,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//Страница приветствия пользователей.
-Route::get('/hello', function () {
-    return <<<php
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Hello user</h1>
-</body>
-</html>
-php;
-});
-//Страница с информацией о проекте..
-Route::get('/info', function () {
-    return <<<php
-<!DOCTYPE html>
-<html>
-<body>
-<p>This project is a news agregator</p>
-</body>
-</html>
-php;
-});
-//Страница для вывода одной и нескольких новостей.
-Route::get('/news', function () {
-    return <<<php
-<!DOCTYPE html>
-<html>
-<body>
-<p>Another rap singer leave Russia</p>
-<p>Ruble exchange rate is still unstable</p>
-</body>
-</html>
-php;
-});
+
+Route::get('/hello', [WelcomeController::class, 'index'])
+    ->name('hello');
+
+Route::get('/categories', [CategoryController::class, 'index'])
+    ->name('categories');
+
+Route::get('/categories/{category}', [CategoryController::class, 'show'])
+    ->name('categories.show');
+
+Route::get('/news/{id}', [NewsController::class, 'show'])
+    ->where('id', '\d+')
+    ->name('news.show');
