@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 class CategoryController extends Controller
 {
     public function index()
@@ -12,16 +14,9 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show(string $category)
+    public function show(int $categoryId)
     {
-        $news = $this->getNews();
-
-        $categoryNews = [];
-        foreach ($news as $item) {
-            if ($item['category'] == $category) {
-                $categoryNews[] = $item;
-            }
-        }
+        $categoryNews = DB::table('news')->where('category_id', '=', $categoryId)->get();
 
         return view('categoryNews', [
             'categoryNews' => $categoryNews

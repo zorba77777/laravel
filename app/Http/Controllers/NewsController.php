@@ -6,10 +6,10 @@ class NewsController extends Controller
 {
     public function show(int $id)
     {
-        $newsList = $this->getNews();
+        $news = $this->getOneNews($id);
 
         return view('news', [
-            'news' => $newsList[$id - 1]
+            'news' => $news
         ]);
     }
 }
