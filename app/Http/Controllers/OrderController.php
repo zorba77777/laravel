@@ -36,6 +36,7 @@ class OrderController extends Controller
 
     public function update(Request $request, Order $order)
     {
+        $this->validate($request, Order::rules());
         $paramsToInsert = $request->except(['_token', 'submit', 'q']);
         $order->fill($paramsToInsert);
         $order->save();
@@ -44,6 +45,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, Order::rules());
         $paramsToInsert = $request->except(['_token']);
         Order::create($paramsToInsert);
         return redirect()->route('orders.index');

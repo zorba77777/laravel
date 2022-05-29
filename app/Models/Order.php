@@ -31,4 +31,19 @@ class Order extends Model
         'email',
         'requestedinfo',
     ];
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public static function rules()
+    {
+        return [
+            'firstname' => 'required',
+            'phonenumber' => 'required',
+            'email' => 'required',
+            'requestedinfo' => 'required'
+        ];
+    }
 }

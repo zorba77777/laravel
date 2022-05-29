@@ -27,4 +27,17 @@ class Feedback extends Model
         'firstname',
         'comment'
     ];
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public static function rules()
+    {
+        return [
+            'firstname' => 'required',
+            'comment' => 'required'
+        ];
+    }
 }

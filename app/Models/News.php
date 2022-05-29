@@ -29,4 +29,18 @@ class News extends Model
         'source_id',
         'text'
     ];
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public static function rules()
+    {
+        return [
+            'category_id' => 'required',
+            'source_id' => 'required',
+            'text' => 'required'
+        ];
+    }
 }
