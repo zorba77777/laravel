@@ -112,10 +112,10 @@
     <nav>
         <ul>
             <li><a href="{{ route('hello') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a></li>
-            <li><a href="{{ route('categories') }}">Categories</a></li>
-            <li><a href="{{ route('feedback') }}">Feedback</a></li>
-            <li><a href="{{ route('order') }}">Order</a></li>
-        </ul>
+            <li><a href="{{ route('categories.index') }}">Categories</a></li>
+            <li><a href="{{ route('feedbacks.index') }}">Feedbacks</a></li>
+            <li><a href="{{ route('orders.index') }}">Orders</a></li>
+            <li><a href="{{ route('news.index') }}">News</a></li>
     </nav>
 
     <article>

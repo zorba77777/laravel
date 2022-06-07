@@ -2,24 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Category;
+use App\Models\News;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = $this->getCategories();
-        return view('categories', [
-            'categories' => $categories
+        return view('categories.index', [
+            'categories' => Category::all()
         ]);
     }
 
-    public function show(int $categoryId)
+    public function show(Category $category)
     {
-        $categoryNews = DB::table('news')->where('category_id', '=', $categoryId)->get();
+        $categoryNews = News::where('category_id', $category->id)->get();
 
-        return view('categoryNews', [
+        return view('categories.show', [
             'categoryNews' => $categoryNews
         ]);
     }
+
+    public function create()
+    {
+        return view('categories.create');
+    }
+
+    public function edit(int $categoryId)
+    {
+        $category = Category::find($categoryId);
+        return view('categories.edit', [
+            'category' => $category
+        ]);
+    }
+
+    public function update(Request $request, Category $category)
+    {
+        $paramsToInsert = $request->except(['_token', 'submit', 'q']);
+        $category->fill($paramsToInsert);
+        $category->save();
+        return redirect()->route('categories.index');
+    }
+
+    public function store(Request $request)
+    {
+        $paramsToInsert = $request->except(['_token']);
+        Category::create($paramsToInsert);
+        return redirect()->route('categories.index');
+    }
+
+    public function delete(Category $category)
+    {
+        $category->forceDelete();
+        return redirect()->route('categories.index');
+    }
+
 }
