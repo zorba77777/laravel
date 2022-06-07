@@ -103,9 +103,9 @@
 
 <h2>News aggregator</h2>
 
-
 <header>
     <h2>@section('title')@show</h2>
+
 </header>
 
 <section>
@@ -116,6 +116,7 @@
             <li><a href="{{ route('feedbacks.index') }}">Feedbacks</a></li>
             <li><a href="{{ route('orders.index') }}">Orders</a></li>
             <li><a href="{{ route('news.index') }}">News</a></li>
+        </ul>
     </nav>
 
     <article>
