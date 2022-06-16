@@ -36,6 +36,7 @@ class FeedbackController extends Controller
 
     public function update(Request $request, Feedback $feedback)
     {
+        $this->validate($request, Feedback::rules());
         $paramsToInsert = $request->except(['_token', 'submit', 'q']);
         $feedback->fill($paramsToInsert);
         $feedback->save();
@@ -44,6 +45,7 @@ class FeedbackController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, Feedback::rules());
         $paramsToInsert = $request->except(['_token']);
         Feedback::create($paramsToInsert);
         return redirect()->route('feedbacks.index');

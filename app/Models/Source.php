@@ -25,4 +25,16 @@ class Source extends Model
     protected $fillable = [
         'description'
     ];
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public static function rules()
+    {
+        return [
+            'description' => 'required'
+        ];
+    }
 }

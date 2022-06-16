@@ -36,6 +36,7 @@ class NewsController extends Controller
 
     public function update(Request $request, News $news)
     {
+        $this->validate($request, News::rules());
         $paramsToInsert = $request->except(['_token', 'submit', 'q']);
         $news->fill($paramsToInsert);
         $news->save();
@@ -44,6 +45,7 @@ class NewsController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, News::rules());
         $paramsToInsert = $request->except(['_token']);
         News::create($paramsToInsert);
         return redirect()->route('news.index');

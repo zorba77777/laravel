@@ -39,6 +39,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
+        $this->validate($request, Category::rules());
         $paramsToInsert = $request->except(['_token', 'submit', 'q']);
         $category->fill($paramsToInsert);
         $category->save();
@@ -47,6 +48,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, Category::rules());
         $paramsToInsert = $request->except(['_token']);
         Category::create($paramsToInsert);
         return redirect()->route('categories.index');
