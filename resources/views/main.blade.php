@@ -9,6 +9,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/http_cdn.ckeditor.com_ckeditor5_34.1.0_classic_ckeditor.js') }}"></script>
     <style>
         * {
             box-sizing: border-box;
