@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ParserController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
@@ -59,10 +60,10 @@ Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.st
 Route::post('/orders/update/{order}', [OrderController::class, 'update'])->name('orders.update')->middleware(['auth', 'is.admin']);
 Route::post('/orders/delete/{order}', [OrderController::class, 'delete'])->name('orders.delete')->middleware(['auth', 'is.admin']);
 
-//Auth::routes();
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Auth::routes();
+//Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+//Route::post('login', [LoginController::class, 'login']);
+//Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -73,4 +74,9 @@ Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.e
 Route::post('/users/store', [UserController::class, 'store'])->name('users.store')->middleware(['auth', 'is.admin']);
 Route::post('/users/update/{user}', [UserController::class, 'update'])->name('users.update')->middleware(['auth', 'is.admin']);
 Route::post('/users/delete/{user}', [UserController::class, 'delete'])->name('users.delete')->middleware(['auth', 'is.admin']);
+
+Route::get('login/{provider}', [LoginController::class, 'redirectToProvider']);
+Route::get('{provider}/callback', [LoginController::class, 'handleProviderCallback']);
+
+Route::get('/parser', [ParserController::class, 'index']);
 
