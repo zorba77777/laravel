@@ -33,9 +33,18 @@
                 </div>
             @endif
             <label for="text">Text</label>
-            <input type="text" id="text" name="text" value="{{$news->text}}">
+            <textarea id="text" name="text"> {{$news->text}}</textarea>
 
             <input type="submit" name="submit" value="Submit">
         </form>
     </div>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#text' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection
+

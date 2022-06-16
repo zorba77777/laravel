@@ -80,3 +80,7 @@ Route::get('{provider}/callback', [LoginController::class, 'handleProviderCallba
 
 Route::get('/parser', [ParserController::class, 'index']);
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
